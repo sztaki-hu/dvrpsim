@@ -1,0 +1,13 @@
+dist
+site
+
+example_package_hmarkoatsztaki
+*.egg-info
+
+.venv
+
+__pycache__
+
+data_interaction
+
+*.log

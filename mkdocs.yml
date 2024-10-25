@@ -1,0 +1,69 @@
+site_name: "dvrpsim"
+
+theme:
+  name: material
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/theme-light-dark
+        name: Switch to dark-mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/theme-light-dark
+        name: Switch to light-mode
+  features:
+    - content.tabs.link
+
+plugins:
+- search
+- mkdocstrings
+
+nav:
+  - Home: README.md
+  - Introduction:
+    - Basic concepts: src/introduction/basics.md
+  - Tutorial:
+    - Our first model:                        src/tutorial/tutorial_01.md
+    - Our first orders:                       src/tutorial/tutorial_02.md
+    - A closer look at the routing procedure: src/tutorial/tutorial_03a.md
+    - Our first routing callback:             src/tutorial/tutorial_03b.md
+    - Order-related features:                 src/tutorial/tutorial_04.md
+    - Location-related features:              src/tutorial/tutorial_05.md
+  - Case studies:
+    - DPDP:
+      - Problem statement: src/case_studies/dpdp/1_prob.md
+      - Problem data:      src/case_studies/dpdp/2_data.md
+      - Model:             src/case_studies/dpdp/3_model.md
+      - Demo routing:      src/case_studies/dpdp/4_demo.md
+    - RMDP:
+      - Problem statement: src/case_studies/rmdp/1_prob.md
+      - Problem data:      src/case_studies/rmdp/2_data.md
+      - Model:             src/case_studies/rmdp/3_model.md
+      - Demo routing:      src/case_studies/rmdp/4_demo.md
+    - SDDP:
+      - Problem statement: src/case_studies/sddp/1_prob.md
+      - Problem data:      src/case_studies/sddp/2_data.md
+      - Model:             src/case_studies/sddp/3_model.md
+      - Demo routing:      src/case_studies/sddp/4_demo.md
+
+site_url: ""
+use_directory_urls: false
+plugins: []
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true  
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
