@@ -5,6 +5,8 @@ before_script:
 
 build:
   stage: build
+  tags:
+    - sztaki-docker
   script:
   - mkdocs build --strict --verbose --site-dir html
   artifacts:
