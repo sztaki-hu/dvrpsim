@@ -1,0 +1,14 @@
+image: python:3
+
+before_script:
+  - pip install mkdocs pymdown-extensions mkdocs-material
+
+build:
+  stage: build
+  tags:
+    - sztaki-docker
+  script:
+  - mkdocs build --strict --verbose --site-dir html
+  artifacts:
+    paths:
+    - html
