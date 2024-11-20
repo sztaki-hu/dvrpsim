@@ -19,6 +19,7 @@ theme:
         name: Switch to light-mode
   features:
     - content.tabs.link
+    - content.code.copy
 
 plugins:
 - search

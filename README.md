@@ -13,3 +13,21 @@ Since the package is included in the Python Package Index, once you have a Pytho
 ```
 python -m pip install dvrpsim
 ```
+
+## References, citation
+
+If you use `dvrpsim` for your research, please consider citing our paper:
+
+Horváth, M., & Tamási, T. (2024). A general modeling and simulation framework for dynamic vehicle routing. <a href="https://arxiv.org/abs/2411.12406" target="_blank">arXiv preprint arXiv:2411.12406</a>.
+
+```
+@misc{horváth2024general,
+    title={A general modeling and simulation framework for dynamic vehicle routing}, 
+    author={Mark\'o Horv\'ath and Tímea Tam\'asi},
+    year={2024},
+    eprint={2411.12406},
+    archivePrefix={arXiv},
+    primaryClass={math.OC},
+    url={https://arxiv.org/abs/2411.12406}, 
+}
+```
