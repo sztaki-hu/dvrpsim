@@ -18,16 +18,15 @@ python -m pip install dvrpsim
 
 If you use `dvrpsim` for your research, please consider citing our paper:
 
-Horváth, M., & Tamási, T. (2024). A general modeling and simulation framework for dynamic vehicle routing. <a href="https://arxiv.org/abs/2411.12406" target="_blank">arXiv preprint arXiv:2411.12406</a>.
+Horváth, M., & Tamási, T. (2025). A general modeling and simulation framework for dynamic vehicle routing. <a href="https://doi.org/10.1016/j.ejtl.2025.100159" target="_blank">EURO Journal on Transportation and Logistics, 14, 100159</a>.
 
 ```
-@misc{horváth2024general,
-    title={A general modeling and simulation framework for dynamic vehicle routing}, 
-    author={Mark\'o Horv\'ath and Tímea Tam\'asi},
-    year={2024},
-    eprint={2411.12406},
-    archivePrefix={arXiv},
-    primaryClass={math.OC},
-    url={https://arxiv.org/abs/2411.12406}, 
+@article{horvath2025general,
+  title={A general modeling and simulation framework for dynamic vehicle routing},
+  author={Horv{\'a}th, Mark{\'o} and Tam{\'a}si, T{\'\i}mea},
+  journal={EURO Journal on Transportation and Logistics},
+  pages={100159},
+  year={2025},
+  publisher={Elsevier}
 }
 ```
