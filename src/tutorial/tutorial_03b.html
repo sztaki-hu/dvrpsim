@@ -1,0 +1,1450 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="tutorial_03a.html">
+      
+      
+        <link rel="next" href="tutorial_04.html">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Our first routing callback - dvrpsim</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#our-first-routing-callback" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="dvrpsim" class="md-header__button md-logo" aria-label="dvrpsim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            dvrpsim
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Our first routing callback
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to dark-mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark-mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07zm-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13zm-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87zM19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35zm4.33-2.7 1.15-2.77 2.2 2.54zm1.15-4.96-1.14-2.78 3.34.24zM9.63 18.93l2.77 1.15-2.53 2.19z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light-mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light-mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.5 2c-1.79 1.15-3 3.18-3 5.5s1.21 4.35 3.03 5.5C4.46 13 2 10.54 2 7.5A5.5 5.5 0 0 1 7.5 2m11.57 1.5 1.43 1.43L4.93 20.5 3.5 19.07zm-6.18 2.43L11.41 5 9.97 6l.42-1.7L9 3.24l1.75-.12.58-1.65L12 3.1l1.73.03-1.35 1.13zm-3.3 3.61-1.16-.73-1.12.78.34-1.32-1.09-.83 1.36-.09.45-1.29.51 1.27 1.36.03-1.05.87zM19 13.5a5.5 5.5 0 0 1-5.5 5.5c-1.22 0-2.35-.4-3.26-1.07l7.69-7.69c.67.91 1.07 2.04 1.07 3.26m-4.4 6.58 2.77-1.15-.24 3.35zm4.33-2.7 1.15-2.77 2.2 2.54zm1.15-4.96-1.14-2.78 3.34.24zM9.63 18.93l2.77 1.15-2.53 2.19z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="dvrpsim" class="md-nav__button md-logo" aria-label="dvrpsim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    dvrpsim
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basic concepts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorial
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorial_01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Our first model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorial_02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Our first orders
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorial_03a.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    A closer look at the routing procedure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Our first routing callback
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="tutorial_03b.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Our first routing callback
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vehicles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-routing-policy-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom routing policy I.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#travel-time-callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Travel time callback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-routing-policy-ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom routing policy II.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-point-on-vehicle-arrival" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decision point on vehicle arrival
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorial_04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Order-related features
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorial_05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Location-related features
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Case studies
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Case studies
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    DPDP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            DPDP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/dpdp/1_prob.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Problem statement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/dpdp/2_data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Problem data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/dpdp/3_model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/dpdp/4_demo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Demo routing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    RMDP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            RMDP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/rmdp/1_prob.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Problem statement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/rmdp/2_data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Problem data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/rmdp/3_model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/rmdp/4_demo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Demo routing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    SDDP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            SDDP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/sddp/1_prob.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Problem statement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/sddp/2_data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Problem data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/sddp/3_model.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../case_studies/sddp/4_demo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Demo routing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vehicles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vehicles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-routing-policy-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom routing policy I.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#travel-time-callback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Travel time callback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-routing-policy-ii" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom routing policy II.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-point-on-vehicle-arrival" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decision point on vehicle arrival
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="our-first-routing-callback">Our first routing callback</h1>
+<p>It's time to define a simple routing callback for our model!</p>
+<p>In this short tutorial we will get familiar with the vehicles, where we will define a custom travel time callback, and we will impose decision points on vehicle arrivals.
+We will also define a simple routing callback.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>For the sake of simplicity, we also implement our demo routing algorithm in Python (in this file) and use direct interaction with the simulator.</p>
+</div>
+<hr />
+<h2 id="vehicles">Vehicles</h2>
+<p>If we want to accept some orders, we need vehicles to deliver them.</p>
+<div class="admonition example">
+<p class="admonition-title">Example (custom vehicles)</p>
+<p>Lets' define a custom vehicle class, say <code>Truck</code>!
+Create a single instance and add it to the model.
+Set the depot as the initial location for the vehicle.</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dvrpsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">Vehicle</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Truck</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span><span class="nb">str</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">vehicle</span> <span class="o">=</span> <span class="n">Truck</span><span class="p">(</span> <span class="s1">&#39;TRUCK&#39;</span> <span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">vehicle</span><span class="o">.</span><span class="n">initial_location</span> <span class="o">=</span> <span class="n">depot</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">model</span><span class="o">.</span><span class="n">add_vehicle</span><span class="p">(</span> <span class="n">vehicle</span> <span class="p">)</span>
+</code></pre></div>
+<p>Now, we can assign orders to the vehicles.</p>
+<hr />
+<h2 id="custom-routing-policy-i">Custom routing policy I.</h2>
+<div class="admonition example">
+<p class="admonition-title">Example (custom routing callback)</p>
+<p>Let's try the following strange policy!
+If the vehicle is at the depot, we accept all unassigned orders and assign them to the vehicle that will deliver them in a single trip.
+Otherwise, if the vehicle is out of the depot, we reject all unassigned orders.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Demo algorithm</label><label for="__tabbed_1_2">Custom callback</label><label for="__tabbed_1_3">Output</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">demo_routing_algorithm</span><span class="p">(</span> <span class="n">state</span><span class="p">:</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="n">Any</span><span class="p">]</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="n">Any</span><span class="p">]:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># collect unassigned orders</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">unassigned_orders</span> <span class="o">=</span> <span class="p">[</span> <span class="n">order_id</span> <span class="k">for</span> <span class="n">order_id</span> <span class="ow">in</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;open_orders&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;open_orders&#39;</span><span class="p">][</span><span class="n">order_id</span><span class="p">][</span><span class="s1">&#39;assigned_vehicle&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="p">]</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="c1"># if none, there is nothing to do</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unassigned_orders</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;vehicles&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;orders&#39;</span><span class="p">:</span> <span class="p">{}</span> <span class="p">}</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="c1"># collect idle vehicles at the depot</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">idle_vehicles</span> <span class="o">=</span> <span class="p">[</span> <span class="n">vehicle_id</span> <span class="k">for</span> <span class="n">vehicle_id</span><span class="p">,</span> <span class="n">vehicle_state</span> <span class="ow">in</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;vehicles&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="k">if</span> <span class="n">vehicle_state</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;IDLE&#39;</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="ow">and</span> <span class="n">vehicle_state</span><span class="p">[</span><span class="s1">&#39;current_visit&#39;</span><span class="p">][</span><span class="s1">&#39;location&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;DEPOT&#39;</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="p">]</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="c1"># if none, all orders are rejected</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">idle_vehicles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="k">return</span> <span class="p">{</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>            <span class="s1">&#39;vehicles&#39;</span><span class="p">:</span> <span class="p">{},</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>            <span class="s1">&#39;orders&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>                <span class="n">order_id</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>                    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;rejected&#39;</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>                <span class="p">}</span> <span class="k">for</span> <span class="n">order_id</span> <span class="ow">in</span> <span class="n">unassigned_orders</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>            <span class="p">}</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>        <span class="p">}</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>    <span class="c1"># otherwise, orders are accepted and assigned to an idle vehicle</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>    <span class="n">vehicle_id</span> <span class="o">=</span> <span class="n">idle_vehicles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>    <span class="n">vehicle_route</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>    <span class="c1"># pickup</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>    <span class="n">vehicle_route</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">{</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>        <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;DEPOT&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>        <span class="s1">&#39;pickup_list&#39;</span><span class="p">:</span> <span class="n">unassigned_orders</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>    <span class="p">}</span> <span class="p">)</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>    <span class="c1"># deliveries</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>    <span class="k">for</span> <span class="n">order_id</span> <span class="ow">in</span> <span class="n">unassigned_orders</span><span class="p">:</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>        <span class="n">vehicle_route</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">{</span>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>            <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;open_orders&#39;</span><span class="p">][</span><span class="n">order_id</span><span class="p">][</span><span class="s1">&#39;delivery_location&#39;</span><span class="p">],</span>
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>            <span class="s1">&#39;delivery_list&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="n">order_id</span> <span class="p">]</span>
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>        <span class="p">}</span> <span class="p">)</span>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>    <span class="c1"># depot return</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>    <span class="n">vehicle_route</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">{</span>
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>        <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;DEPOT&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>    <span class="p">}</span> <span class="p">)</span>
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>    <span class="k">return</span> <span class="p">{</span>
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>        <span class="s1">&#39;vehicles&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>            <span class="n">vehicle_id</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>                <span class="s1">&#39;next_visits&#39;</span><span class="p">:</span> <span class="n">vehicle_route</span>
+<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>            <span class="p">}</span>
+<a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a>        <span class="p">},</span>
+<a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>        <span class="s1">&#39;orders&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a>            <span class="n">order_id</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>                <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;accepted&#39;</span>
+<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a>            <span class="p">}</span> <span class="k">for</span> <span class="n">order_id</span> <span class="ow">in</span> <span class="n">unassigned_orders</span>
+<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a>        <span class="p">}</span>
+<a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>    <span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">DemoModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">routing_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="k">return</span> <span class="n">demo_routing_algorithm</span><span class="p">(</span> <span class="n">state</span> <span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>INFO    :        0.0 | 00:00:00 | START
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>INFO    :        8.0 | 00:00:08 | order O-1 is requested (DEPOT -&gt; CUSTOMER 1)
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>INFO    :        8.0 | 00:00:08 | &lt;&lt;&lt; routing &gt;&gt;&gt;
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>INFO    :        8.0 | 00:00:08 | TRUCK | service is started
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>INFO    :        8.0 | 00:00:08 | TRUCK | order O-1 is picked up
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>INFO    :        8.0 | 00:00:08 | TRUCK | service is finished
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>INFO    :        8.0 | 00:00:08 | TRUCK | departed from DEPOT to CUSTOMER 1
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>INFO    :        8.0 | 00:00:08 | TRUCK | arrived at CUSTOMER 1
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>INFO    :        8.0 | 00:00:08 | TRUCK | service is started
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>INFO    :        8.0 | 00:00:08 | TRUCK | order O-1 is delivered
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>INFO    :        8.0 | 00:00:08 | TRUCK | service is finished
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>INFO    :        8.0 | 00:00:08 | TRUCK | departed from CUSTOMER 1 to DEPOT
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>INFO    :        8.0 | 00:00:08 | TRUCK | arrived at DEPOT
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>INFO    :        8.0 | 00:00:08 | TRUCK | service is started
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>INFO    :        8.0 | 00:00:08 | TRUCK | service is finished
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>...
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Although we currently have only one vehicle, our algorithm is prepared for multiple vehicles:</p>
+<ol>
+<li>We collect the open orders that have not yet been assigned to a vehicle.
+   If all orders are assigned, there is nothing to do.</li>
+<li>We collect the idle vehicles that located at the depot.<ol>
+<li>If there is none, all unassigned orders will be rejected.</li>
+<li>Otherwise, all unassigned orders will be accpeted and assigned to a single vehicle to be delivered in one trip.</li>
+</ol>
+</li>
+</ol>
+<p>Our code works, however, the vehicle is currently traveling at the speed of light, which does not seem very realistic.</p>
+<hr />
+<h2 id="travel-time-callback">Travel time callback</h2>
+<div class="admonition example">
+<p class="admonition-title">Example (travel time callback)</p>
+<p>Let's define a (still unrealistic) travel time callback where the travel time between any two locations is 5 units of time!</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Code snippet</label><label for="__tabbed_2_2">Output</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Truck</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span><span class="nb">str</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">travel_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span><span class="n">Location</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span><span class="n">Location</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="k">return</span> <span class="mi">5</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>...
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>INFO    :        8.0 | 00:00:08 | TRUCK | departed from DEPOT to CUSTOMER 1
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>INFO    :       13.0 | 00:00:13 | TRUCK | arrived at CUSTOMER 1
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>INFO    :       13.0 | 00:00:13 | TRUCK | service is started
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>INFO    :       13.0 | 00:00:13 | TRUCK | order O-1 is delivered
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>INFO    :       13.0 | 00:00:13 | TRUCK | service is finished
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>INFO    :       13.0 | 00:00:13 | TRUCK | departed from CUSTOMER 1 to DEPOT
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>INFO    :       16.0 | 00:00:16 | order O-2 is requested (DEPOT -&gt; CUSTOMER 2)
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>INFO    :       16.0 | 00:00:16 | &lt;&lt;&lt; routing &gt;&gt;&gt;
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>INFO    :       16.0 | 00:00:16 | order O-2 is rejected
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>INFO    :       18.0 | 00:00:18 | TRUCK | arrived at DEPOT
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>...
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Nice! The travel time between locations is now indeed 5 units of time.
+As a result, the second order arrives at a time when the vehicle is out of the depot, so it is rejected.</p>
+<hr />
+<h2 id="custom-routing-policy-ii">Custom routing policy II.</h2>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Let's modify the policy!
+We accept all orders, but we still do not assign them to vehicles out of the depot.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Code snippet</label><label for="__tabbed_3_2">Output</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">idle_vehicles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="k">return</span> <span class="p">{</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>        <span class="s1">&#39;vehicles&#39;</span><span class="p">:</span> <span class="p">{},</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        <span class="s1">&#39;orders&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>            <span class="n">order_id</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>                <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;accepted&#39;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>            <span class="p">}</span> <span class="k">for</span> <span class="n">order_id</span> <span class="ow">in</span> <span class="n">unassigned_orders</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        <span class="p">}</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>...
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>INFO    :       13.0 | 00:00:13 | TRUCK | departed from CUSTOMER 1 to DEPOT
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>INFO    :       16.0 | 00:00:16 | order O-2 is requested (DEPOT -&gt; CUSTOMER 2)
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>INFO    :       16.0 | 00:00:16 | &lt;&lt;&lt; routing &gt;&gt;&gt;
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>INFO    :       18.0 | 00:00:18 | TRUCK | arrived at DEPOT
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>INFO    :       18.0 | 00:00:18 | TRUCK | service is started
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>INFO    :       18.0 | 00:00:18 | TRUCK | service is finished
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>INFO    :       24.0 | 00:00:24 | order O-3 is requested (DEPOT -&gt; CUSTOMER 3)
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>INFO    :       24.0 | 00:00:24 | &lt;&lt;&lt; routing &gt;&gt;&gt;
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>INFO    :       24.0 | 00:00:24 | TRUCK | service is started
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>INFO    :       24.0 | 00:00:24 | TRUCK | order O-2 is picked up
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>INFO    :       24.0 | 00:00:24 | TRUCK | order O-3 is picked up
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>INFO    :       24.0 | 00:00:24 | TRUCK | service is finished
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>INFO    :       24.0 | 00:00:24 | TRUCK | departed from DEPOT to CUSTOMER 2
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>...
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Okay! Now the second order was picked up and delivered together with the third order.</p>
+<hr />
+<p>However, if we set the travel time to 10, we do not have the opportunity to assign the last order to the vehicle:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Code snippet</label><label for="__tabbed_4_2">Output</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Truck</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span><span class="nb">str</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">travel_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span><span class="n">Location</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span><span class="n">Location</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        <span class="k">return</span> <span class="mi">10</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>...
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>INFO    :       62.0 | 00:01:02 | TRUCK | departed from CUSTOMER 4 to DEPOT
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>INFO    :       72.0 | 00:01:12 | TRUCK | arrived at DEPOT
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>INFO    :       72.0 | 00:01:12 | TRUCK | service is started
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>INFO    :       72.0 | 00:01:12 | TRUCK | service is finished
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>INFO    :       72.0 | 00:01:12 | FINISH
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>WARNING : order O-5 has been accepted but has not been delivered
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>A possible solution is to also impose a decision point when the vehicle returns to the depot and there are unassigned orders.</p>
+<hr />
+<h2 id="decision-point-on-vehicle-arrival">Decision point on vehicle arrival</h2>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Let's modify the model by imposing a decision point when the vehicle returns to the depot and there are unassigned orders!</p>
+</div>
+<p>There are at least two ways to impose decision point on arrivals:</p>
+<ul>
+<li>We can customize the <code>on_vehicle_arrival</code> callback of the model.</li>
+<li>We can customize the <code>on_arrival</code> callback of the vehicle.</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:3"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Model callback</label><label for="__tabbed_5_2">Vehicle callback</label><label for="__tabbed_5_3">Output</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">DemoModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">on_vehicle_arrival</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">:</span><span class="n">Vehicle</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>        <span class="k">if</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">current_location</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="s1">&#39;DEPOT&#39;</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span> <span class="n">order</span> <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">order</span><span class="o">.</span><span class="n">picked_up</span> <span class="p">):</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">request_for_routing</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Truck</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">on_arrival</span><span class="p">(</span> <span class="bp">self</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_location</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="s1">&#39;DEPOT&#39;</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span> <span class="n">order</span> <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">order</span><span class="o">.</span><span class="n">picked_up</span> <span class="p">):</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">request_for_routing</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>...
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>INFO    :       58.0 | 00:00:58 | TRUCK | arrived at DEPOT
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>INFO    :       58.0 | 00:00:58 | TRUCK | service is started
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>INFO    :       58.0 | 00:00:58 | TRUCK | service is finished
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>INFO    :       58.0 | 00:00:58 | &lt;&lt;&lt; routing &gt;&gt;&gt;
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>INFO    :       58.0 | 00:00:58 | TRUCK | service is started
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>INFO    :       58.0 | 00:00:58 | TRUCK | order O-4 is picked up
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>INFO    :       58.0 | 00:00:58 | TRUCK | order O-5 is picked up
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>INFO    :       58.0 | 00:00:58 | TRUCK | service is finished
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>...
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>INFO    :       88.0 | 00:01:28 | FINISH
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Whatever we choose, it works!
+When the vehicle returns to the depot to pick up the fourth order, a routing is requested. As a result, the vehicle also picks up the fifth order.</p>
+<hr />
+<p>Let's explore other some features of the simulator!</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.tabs.link", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
